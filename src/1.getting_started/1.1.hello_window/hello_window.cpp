@@ -14,8 +14,8 @@ int main()
 {
     // glfw: initialize and configure
     // ------------------------------
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwInit();//初始化GLFW
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);//配置GLFW
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -32,10 +32,13 @@ int main()
         glfwTerminate();
         return -1;
     }
+
     glfwMakeContextCurrent(window);
+    //每次窗口大小被调整的时候被调用
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     // glad: load all OpenGL function pointers
+    // GLAD是用来管理OpenGL的函数指针的
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -45,16 +48,20 @@ int main()
 
     // render loop
     // -----------
+    // 每次循环的开始前检查一次GLFW是否被要求退出
     while (!glfwWindowShouldClose(window))
     {
         // input
         // -----
         processInput(window);
 
+         // 渲染指令
+         //...
+
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        glfwSwapBuffers(window);//交换颜色缓冲
+        glfwPollEvents();//检查有没有触发什么事件（比如键盘输入、鼠标移动等）、更新窗口状态，并调用对应的回调函数（可以通过回调方法手动设置）
     }
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
